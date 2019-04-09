@@ -49,28 +49,13 @@ class _TabNavigatorPageState extends State<TabNavigatorPage> {
           },
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页')),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.search), title: Text('搜索')),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.camera_alt), title: Text('旅拍')),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle), title: Text('我的')),
+            BottomNavigationBarItem(icon: Icon(Icons.search), title: Text('搜索')),
+            BottomNavigationBarItem(icon: Icon(Icons.camera_alt),title: Text('旅拍')),
+            BottomNavigationBarItem(icon: Icon(Icons.account_circle), title: Text('我的')),
           ]),
 
     );
   }
-
-//  String text() {
-//    HomeDao.fetch().then((result) {
-//      setState(() {
-//        resultString = json.encode(result.toJson());
-//      });
-//    }).catchError((e) {
-//      setState(() {
-//        resultString = e.toString();
-//      });
-//    });
-//  }
 }
 
 

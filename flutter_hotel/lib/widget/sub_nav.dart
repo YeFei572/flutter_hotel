@@ -24,18 +24,33 @@ class SubNav extends StatelessWidget {
   Widget _items(BuildContext context) {
     if (subnavList == null) return null;
     List<Widget> items = [];
-    subnavList.forEach((model) {
-      items.add(_item(context, model));
+    int separate = (subnavList.length / 2 + 0.5).toInt();
+    subnavList.forEach((mode) {
+      items.add(_item(context, mode));
     });
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: items,
+
+    return Column(
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: items.sublist(0, separate),
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: items.sublist(separate, subnavList.length),
+          ),
+        )
+      ],
     );
   }
 }
 
 Widget _item(BuildContext context, CommonModel model) {
-  return GestureDetector(
+  return Expanded(
+    flex: 1,
+      child: GestureDetector(
     onTap: () {
       Navigator.push(
           context,
@@ -50,14 +65,17 @@ Widget _item(BuildContext context, CommonModel model) {
       children: <Widget>[
         Image.network(
           model.icon,
-          width: 18,
-          height: 18,
+          width: 25,
+          height: 25,
         ),
-        Text(
-          model.title,
-          style: TextStyle(fontSize: 12),
+        Padding(
+          padding: EdgeInsets.only(top: 3),
+          child: Text(
+            model.title,
+            style: TextStyle(fontSize: 12),
+          ),
         )
       ],
     ),
-  );
+  ));
 }
