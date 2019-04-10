@@ -21,7 +21,7 @@ class SearchBar extends StatefulWidget {
   final String hint;
 
   ///首页默认文字
-   String defaultText;
+  String defaultText;
 
   ///左边按钮点击回调
   final void Function() leftButtonClick;
@@ -38,7 +38,10 @@ class SearchBar extends StatefulWidget {
   ///内容变化的回调
   final ValueChanged<String> onChanged;
 
-   SearchBar(
+  ///路由返回的参数
+  String resultText;
+
+  SearchBar(
       {Key key,
       this.enabled = true,
       this.hideLeft,
@@ -49,7 +52,8 @@ class SearchBar extends StatefulWidget {
       this.rightButtonClick,
       this.speakClick,
       this.inputBoxClick,
-      this.onChanged})
+      this.onChanged,
+      this.resultText})
       : super(key: key);
 
   @override
@@ -66,11 +70,18 @@ class _SearchBarState extends State<SearchBar> {
     // TODO: implement initState
     print('search_bar  initState ${widget.defaultText}');
     if (widget.defaultText != null) {
-      setState(() {
-        _controller.text = widget.defaultText;
-      });
+      _controller.text = widget.defaultText;
     }
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(SearchBar oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    if (widget.resultText != null) {
+      _controller.text = widget.resultText;
+    }
   }
 
   @override
@@ -82,6 +93,7 @@ class _SearchBarState extends State<SearchBar> {
 
   ///搜索界面展示
   _genNormalSearch() {
+    print('_genNormalSearch ====== ${widget.defaultText}');
     return Container(
       child: Row(
         children: <Widget>[
@@ -168,6 +180,7 @@ class _SearchBarState extends State<SearchBar> {
 
   ///搜索 输入栏
   Widget _inputBox() {
+    print('_inputBox');
     Color inputBoxColor;
     if (widget.searchBarType == SearchBarType.home) {
       inputBoxColor = Colors.white;
@@ -258,7 +271,6 @@ class _SearchBarState extends State<SearchBar> {
     if (text.length > 0) {
       setState(() {
         showClear = true;
-
       });
     } else {
       setState(() {

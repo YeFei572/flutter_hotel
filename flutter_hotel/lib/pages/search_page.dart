@@ -28,7 +28,7 @@ const URL =
 class SearchPage extends StatefulWidget {
   final bool hideLeft;
   final String searchUrl;
-  String keyWord;
+   String keyWord;
   final String hint;
 
   SearchPage(
@@ -44,6 +44,8 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   SearchModel searchModel;
   String keyword;
+  ///路由语音返回值
+  String resultText;
 
   @override
   void initState() {
@@ -79,12 +81,12 @@ class _SearchPageState extends State<SearchPage> {
   _onTextChange(String text) {
     keyword = text;
     if (text.trim().length == 0) {
-      print('====text==== $text');
       setState(() {
         searchModel = null;
       });
       return;
     }
+    print('====text==== $text');
     String url = widget.searchUrl + text;
     SearchDao.fetch(url, text).then((SearchModel model) {
       ///只有当当前输入的内容和服务端返回的内容一致时才渲染
@@ -99,16 +101,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   _appBar() {
-//    SearchBar(
-//      hideLeft: true,
-//      defaultText: '',
-//      hint: '123',
-//      leftButtonClick: () {
-//        Navigator.pop(context);
-//      },
-//      onChanged: _onTextChange,
-//
-//    )
+    print(' _appbar ======  ${widget.keyWord}');
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -128,17 +121,23 @@ class _SearchPageState extends State<SearchPage> {
             Navigator.pop(context);
           },
           onChanged: _onTextChange,
+          resultText: resultText,
         ),
       ),
     );
   }
 
-  _jumpToSpeak() async{
+  _jumpToSpeak() async {
     String result = await Navigator.of(context).push(CustomRoute(SpeakPage(
       navigator_type: NAVIGATOR_TYPE.search,
     ))) as String;
 
     print('_jumpToSpeak $result');
+
+    setState(() {
+      resultText = result ?? '';
+    });
+
     _onTextChange(result ?? '');
   }
 

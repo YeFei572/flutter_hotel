@@ -81,13 +81,6 @@ class _SpeakPageState extends State<SpeakPage>
       }
     }).catchError((e) {
       print('-----语言识别 error-----' + e.toString());
-      if (widget.navigator_type == NAVIGATOR_TYPE.home) {
-        Navigator.pop(context);
-        Navigator.of(context)
-            .push(CustomRoute(SearchPage(keyWord: '深圳')));
-      } else {
-        Navigator.pop(context,'深圳');
-      }
     });
   }
 

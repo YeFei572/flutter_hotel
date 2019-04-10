@@ -101,7 +101,7 @@ public class AsrPlugin implements MethodChannel.MethodCallHandler {
 
         ArrayList<String> toApplyList = new ArrayList<String>();
 
-        for (String perm : permissions) {
+        for (String perm :permissions){
             if (PackageManager.PERMISSION_GRANTED != ContextCompat.checkSelfPermission(activity, perm)) {
                 toApplyList.add(perm);
                 //进入到这里代表没有权限.
@@ -109,11 +109,12 @@ public class AsrPlugin implements MethodChannel.MethodCallHandler {
             }
         }
         String tmpList[] = new String[toApplyList.size()];
-        if (!toApplyList.isEmpty()) {
+        if (!toApplyList.isEmpty()){
             ActivityCompat.requestPermissions(activity, toApplyList.toArray(tmpList), 123);
         }
 
     }
+
 
     private OnAsrListener onAsrListener = new OnAsrListener() {
         @Override
