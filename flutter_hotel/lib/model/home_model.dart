@@ -1,8 +1,8 @@
-import 'package:flutter_hotel/model/common_model.dart';
-import 'package:flutter_hotel/model/config_model.dart';
-import 'package:flutter_hotel/model/sales_box_model.dart';
 
+import 'common_model.dart';
+import 'config_model.dart';
 import 'grid_nav_model.dart';
+import 'sales_box_model.dart';
 
 class HomeModel {
   final ConfigModel config;

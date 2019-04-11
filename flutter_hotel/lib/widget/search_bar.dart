@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 enum SearchBarType { home, normal, homeLight }
 
 class SearchBar extends StatefulWidget {
+  static const String TAG = 'SearchBar';
+
   ///是否禁止搜索
   final bool enabled;
 
@@ -21,7 +23,7 @@ class SearchBar extends StatefulWidget {
   final String hint;
 
   ///首页默认文字
-   String defaultText;
+  String defaultText;
 
   ///左边按钮点击回调
   final void Function() leftButtonClick;
@@ -38,7 +40,10 @@ class SearchBar extends StatefulWidget {
   ///内容变化的回调
   final ValueChanged<String> onChanged;
 
-   SearchBar(
+  ///搜索界面跳转语言界面返回时所带参数
+  String resultText;
+
+  SearchBar(
       {Key key,
       this.enabled = true,
       this.hideLeft,
@@ -49,6 +54,7 @@ class SearchBar extends StatefulWidget {
       this.rightButtonClick,
       this.speakClick,
       this.inputBoxClick,
+      this.resultText,
       this.onChanged})
       : super(key: key);
 
@@ -66,11 +72,20 @@ class _SearchBarState extends State<SearchBar> {
     // TODO: implement initState
     print('search_bar  initState ${widget.defaultText}');
     if (widget.defaultText != null) {
-      setState(() {
-        _controller.text = widget.defaultText;
-      });
+      _controller.text = widget.defaultText;
     }
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(SearchBar oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    print('Search_bar  didUpdateWidget  defaultText = ${widget.defaultText}');
+    print('Search_bar  didUpdateWidget  result = ${widget.resultText}');
+    if (widget.resultText != null) {
+      _controller.text = widget.resultText;
+    }
   }
 
   @override
@@ -82,6 +97,7 @@ class _SearchBarState extends State<SearchBar> {
 
   ///搜索界面展示
   _genNormalSearch() {
+    print('Search_bar  _genNormalSearch  defaultText = ${widget.defaultText}');
     return Container(
       child: Row(
         children: <Widget>[
@@ -258,7 +274,6 @@ class _SearchBarState extends State<SearchBar> {
     if (text.length > 0) {
       setState(() {
         showClear = true;
-
       });
     } else {
       setState(() {

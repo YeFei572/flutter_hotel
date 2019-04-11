@@ -1,5 +1,6 @@
 
-import 'package:flutter_hotel/model/common_model.dart';
+
+import 'common_model.dart';
 
 class SalesBoxModel {
 //  String icon	String	NonNull

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hotel/model/common_model.dart';
 import 'package:flutter_hotel/model/sales_box_model.dart';
-import 'package:flutter_hotel/widget/webview.dart';
+import 'package:flutter_hotel/widget/web_view.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 ///活动卡片

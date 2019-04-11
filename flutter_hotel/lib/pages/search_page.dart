@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hotel/pages/home_page.dart';
-import 'package:flutter_hotel/pages/speak_page.dart';
-import 'package:flutter_hotel/widget/custom_route_widget.dart';
-import 'package:flutter_hotel/widget/search_bar.dart';
-import 'package:flutter_hotel/model/search_model.dart';
-import 'package:flutter_hotel/dao/search_dao.dart';
-import 'package:flutter_hotel/widget/webview.dart';
+import '../pages/home_page.dart';
+import '../pages/speak_page.dart';
+import '../widget/custom_route_widget.dart';
+import '../widget/search_bar.dart';
+import '../model/search_model.dart';
+import '../dao/search_dao.dart';
+import '../widget/web_view.dart';
 
 const TYPES = [
   'channelgroup',
@@ -28,7 +28,7 @@ const URL =
 class SearchPage extends StatefulWidget {
   final bool hideLeft;
   final String searchUrl;
-  String keyWord;
+  final String keyWord;
   final String hint;
 
   SearchPage(
@@ -124,6 +124,7 @@ class _SearchPageState extends State<SearchPage> {
           defaultText: widget.keyWord,
           speakClick: _jumpToSpeak,
           hint: widget.hint,
+          resultText: keyword,
           leftButtonClick: () {
             Navigator.pop(context);
           },
@@ -133,11 +134,14 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  _jumpToSpeak() async{
+  _jumpToSpeak() async {
     String result = await Navigator.of(context).push(CustomRoute(SpeakPage(
       navigator_type: NAVIGATOR_TYPE.search,
     ))) as String;
 
+    setState(() {
+      keyword = result ?? '';
+    });
     print('_jumpToSpeak $result');
     _onTextChange(result ?? '');
   }

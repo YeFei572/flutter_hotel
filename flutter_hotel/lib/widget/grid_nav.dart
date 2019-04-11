@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hotel/model/common_model.dart';
 import 'package:flutter_hotel/model/grid_nav_model.dart';
-import 'package:flutter_hotel/widget/webview.dart';
+import 'package:flutter_hotel/widget/web_view.dart';
 import 'dart:convert';
 
 class GridNav extends StatelessWidget {

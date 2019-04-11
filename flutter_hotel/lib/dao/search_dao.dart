@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:flutter_hotel/model/search_model.dart';
+import '../model/search_model.dart';
 //import 'package:http/http.dart'; //包名重复用as 进行改名
 
 //首页大接口

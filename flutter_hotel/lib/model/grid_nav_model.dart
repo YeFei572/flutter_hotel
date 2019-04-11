@@ -1,6 +1,7 @@
 //首页网格卡片模式
 
-import 'package:flutter_hotel/model/common_model.dart';
+
+import 'common_model.dart';
 
 class GridNavModel {
 //  GridNavItem hotel	Object	NonNull
