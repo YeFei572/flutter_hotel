@@ -1,4 +1,4 @@
-# flutter_xiecheng
+# flutter_hotel
 
 A new Flutter application.
 

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_hotel/pages/search_page.dart';
 import 'package:flutter_hotel/plugin/as_manager.dart';
 import 'package:flutter_hotel/widget/custom_route_widget.dart';
+import 'package:provide/provide.dart';
+import 'package:flutter_hotel/provide/speak_provide.dart';
 
 enum NAVIGATOR_TYPE { home, search }
 
@@ -70,11 +73,13 @@ class _SpeakPageState extends State<SpeakPage>
           speakResult = text;
         });
 
+        Provide.value<SpeakProvide>(context).setSearchResult(speakResult);
+
         ///先关闭当前页面，再进行跳转
         if (widget.navigator_type == NAVIGATOR_TYPE.home) {
           Navigator.pop(context);
           Navigator.of(context)
-              .push(CustomRoute(SearchPage(keyWord: speakResult)));
+              .push(CustomRoute(SearchPage(keyWord: speakResult,)));
         } else {
           Navigator.pop(context,speakResult);
         }

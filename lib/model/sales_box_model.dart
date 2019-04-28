@@ -1,4 +1,5 @@
-import 'package:flutter_xiecheng/model/common_model.dart';
+
+import 'package:flutter_hotel/model/common_model.dart';
 
 class SalesBoxModel {
 //  String icon	String	NonNull
@@ -33,5 +34,32 @@ class SalesBoxModel {
       smallCard3: CommonModel.fromJson(json['smallCard3']),
       smallCard4: CommonModel.fromJson(json['smallCard4']),
     );
+  }
+
+  Map<String,dynamic> toJson(){
+    final Map<String,dynamic> data = Map();
+    data['icon'] =this.icon;
+    data['moreUrl'] =this.moreUrl;
+
+    if(this.bigCard1!=null){
+      data['bigCard1'] = this.bigCard1;
+    }
+    if(this.bigCard2!=null){
+      data['bigCard2'] = this.bigCard2;
+    }
+    if(this.smallCard1!=null){
+      data['smallCard1'] = this.smallCard1;
+    }
+    if(this.smallCard2!=null){
+      data['smallCard2'] = this.smallCard2;
+    }
+    if(this.smallCard3!=null){
+      data['smallCard3'] = this.smallCard3;
+    }
+    if(this.smallCard4!=null){
+      data['smallCard4'] = this.smallCard4;
+    }
+
+    return data;
   }
 }

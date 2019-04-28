@@ -25,11 +25,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+def keystorePropertiesFile = rootProject.file("key.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdkVersion 27
 
     sourceSets {
-        pages.java.srcDirs += 'src/main/kotlin'
+        main.java.srcDirs += 'src/main/kotlin'
     }
 
     lintOptions {
@@ -38,20 +42,47 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.flutterxiecheng"
+        applicationId "com.example.flutterhotel"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk{
+            abiFilters "arm64-v8a","x86_64","x86","armeabi","armeabi-v7a" //只打包flutter所支持的架构，flutter没有armeabi、armeabi-v7a架构的so,加x86的原因是为了能够兼容模拟器
+        }
     }
 
+//    buildTypes {
+//        release {
+//            // TODO: Add your own signing config for the release build.
+//            // Signing with the debug keys for now, so `flutter run --release` works.
+//            signingConfig signingConfigs.debug
+//        }
+//    }
+
+    signingConfigs {
+        release {
+            keyAlias "key"
+            keyPassword "dzx123456"
+            storeFile file("D:/key.jks")
+            storePassword "dzx123456"
+        }
+    }
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
+    }
+
+
+    packagingOptions{
+        //确保app与asr_plugin都依赖libflutter.so merge时不冲突@https://github.com
+//        pickFirst 'lib/x86_64/libflutter.so'
+//        pickFirst 'lib/x86/libflutter.so'
+//        pickFirst 'lib/arm64-v8a/libflutter.so'
+//        pickFirst 'lib/armeabi/libflutter.so'
+        pickFirst 'lib/armeabi-v7a/libflutter.so'
     }
 }
 
@@ -64,4 +95,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation project(':asr_plugin')
 }

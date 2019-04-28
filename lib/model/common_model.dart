@@ -1,9 +1,14 @@
 class CommonModel {
+//  String icon	String	Nullable
+//  String title	String	Nullable
+//  String url	String	NonNull
+//  String statusBarColor	String	Nullable
+//  bool hideAppBar	bool	Nullable
   final String icon;
   final String title;
   final String url;
   final String statusBarColor;
-  final String hideAppBar;
+  final bool hideAppBar;
 
   CommonModel(
       {this.icon, this.title, this.url, this.statusBarColor, this.hideAppBar});
@@ -16,5 +21,15 @@ class CommonModel {
       statusBarColor: json['statusBarColor'],
       hideAppBar: json['hideAppBar'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['icon'] = this.icon;
+    data['title'] = this.title;
+    data['url'] = this.url;
+    data['statusBarColor'] = this.statusBarColor;
+    data['hideAppBar'] = this.hideAppBar;
+    return data;
   }
 }
