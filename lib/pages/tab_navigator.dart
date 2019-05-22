@@ -28,6 +28,7 @@ class _TabNavigatorPageState extends State<TabNavigatorPage> {
     return Scaffold(
       body: PageView(
         controller: _pageController,
+        physics: NeverScrollableScrollPhysics(),
         onPageChanged: (index) {
           setState(() {
             _currentIndex = index;

@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'my_page/blue_tooth_page.dart';
 
 class MyPage extends StatefulWidget {
   @override
@@ -29,6 +32,23 @@ class _MyPageState extends State<MyPage> {
               ),
             ),
           ],
+        ),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+                CupertinoPageRoute(builder: (context) => BlueToothPage()));
+          },
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: 40,
+            decoration: BoxDecoration(
+                color: Colors.black12,
+                border: Border(
+                    bottom: BorderSide(color: Colors.black12, width: 1))),
+            child: ListTile(
+              title: Text('蓝牙'),
+            ),
+          ),
         )
       ],
     ));
